@@ -1,14 +1,11 @@
 """Loads the ruy library, used by TensorFlow Lite."""
 
-load("//third_party:repo.bzl", "tf_http_archive", "tf_mirror_urls")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def repo():
-    tf_http_archive(
+    http_archive(
         name = "ruy",
-        # LINT.IfChange
-        sha256 = "dd6bf40322303cf8982f340e4139397c8fa350ff691d5254599cb21e0138fc65",
-        strip_prefix = "ruy-841ea4172ba904fe3536789497f9565f2ef64129",
-        urls = tf_mirror_urls("https://github.com/google/ruy/archive/841ea4172ba904fe3536789497f9565f2ef64129.zip"),
-        # LINT.ThenChange(//tensorflow/lite/tools/cmake/modules/ruy.cmake)
-        build_file = "//third_party/ruy:BUILD",
+        sha256 = "c68f213a2026e820e08682210da27ee8f138d7c0c98fe589e0378eb21170cc48",
+        strip_prefix = "ruy-2.9.2",
+        url = "https://github.com/mrsnu/ruy/archive/refs/tags/v2.9.2.zip",
     )
