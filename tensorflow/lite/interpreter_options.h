@@ -25,10 +25,16 @@ namespace tflite {
 class InterpreterOptions {
  public:
   InterpreterOptions()
-      : experimental_preserve_all_tensors_(false),
+      : target_nodes_({}),
+        experimental_preserve_all_tensors_(false),
         experimental_ensure_dynamic_tensors_are_released_(false),
         experimental_optimize_memory_for_large_tensors_(0) {}
+  
+  void SetTargetNodes(std::set<int> target_nodes = {}) {
+    target_nodes_ = target_nodes;
+  }
 
+  const std::set<int>& GetTargetNodes() { return target_nodes_; }
   /// Preserving all intermediates tensors for debugging.
   /// WARNING: This is an experimental API and subject to change.
   void SetPreserveAllTensors(bool value = true) {
@@ -77,6 +83,7 @@ class InterpreterOptions {
   }
 
  private:
+  std::set<int> target_nodes_;
   bool experimental_preserve_all_tensors_;
   bool experimental_ensure_dynamic_tensors_are_released_;
   int experimental_optimize_memory_for_large_tensors_;
